@@ -1,21 +1,23 @@
-// src/vs/workbench/contrib/nutanaa/browser/providerExplorerView.ts
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Nutanaa Studio OS. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
 
 import { ViewPane, IViewPaneOptions } from '../../../browser/parts/views/viewPane.js';
 import { IKeybindingService } from '../../../../platform/keybinding/common/keybinding.js';
 import { IContextMenuService } from '../../../../platform/contextview/browser/contextView.js';
 import { IConfigurationService } from '../../../../platform/configuration/common/configuration.js';
 import { IContextKeyService } from '../../../../platform/contextkey/common/contextkey.js';
-import { IViewDescriptorService, ITreeView, ITreeViewDataProvider, ITreeItem, TreeItemCollapsibleState } from '../../../common/views.js';
-import { IInstantiationService } from '../../../../platform/instantiation/common/instantiation.js'
+import { IViewDescriptorService, ITreeView } from '../../../common/views.js';
+import { IInstantiationService } from '../../../../platform/instantiation/common/instantiation.js';
 import { IOpenerService } from '../../../../platform/opener/common/opener.js';
-
 import { IThemeService } from '../../../../platform/theme/common/themeService.js';
-
 import { IHoverService } from '../../../../platform/hover/browser/hover.js';
-import { Emitter, Event } from '../../../../base/common/event.js';
-import { Codicon } from '../../../../base/common/codicons.js';
+
+import { ProviderExplorerDataProvider } from './providerExplorerDataProvider.js';
 
 export class ProviderExplorerView extends ViewPane {
+
 	private treeView!: ITreeView;
 
 	constructor(
@@ -30,32 +32,25 @@ export class ProviderExplorerView extends ViewPane {
 		@IInstantiationService instantiationService: IInstantiationService,
 		@IHoverService hoverService: IHoverService
 	) {
-		super(options, keybindingService, contextMenuService, configurationService, contextKeyService, viewDescriptorService, instantiationService, openerService, themeService, hoverService);
+		super(
+			options,
+			keybindingService,
+			contextMenuService,
+			configurationService,
+			contextKeyService,
+			viewDescriptorService,
+			instantiationService,
+			openerService,
+			themeService,
+			hoverService
+		);
 	}
 
 	protected override renderBody(container: HTMLElement): void {
 		super.renderBody(container);
-		const dataProvider = this.instantiationService.createInstance(ProviderExplorerDataProvider);		this.treeView.dataProvider = dataProvider;
-		
-	}
-}
 
-class ProviderExplorerDataProvider implements ITreeViewDataProvider {
-	private readonly _onDidChangeTreeData = new Emitter<ITreeItem[] | void>();
-	readonly onDidChangeTreeData: Event<ITreeItem[] | void> = this._onDidChangeTreeData.event;
+		const dataProvider = this.instantiationService.createInstance(ProviderExplorerDataProvider);
 
-	async getChildren(element?: ITreeItem): Promise<ITreeItem[]> {
-		if (!element) {
-			return [
-				{ handle: 'p-anthropic', label: { label: 'Anthropic Claude Engine (Online)' }, collapsibleState: TreeItemCollapsibleState.None, themeIcon: { id: Codicon.serverProcess.id } },
-				{ handle: 'p-openai', label: { label: 'OpenAI GPT-4o Gateway (Online)' }, collapsibleState: TreeItemCollapsibleState.None, themeIcon: { id: Codicon.server.id } },
-				{ handle: 'p-local', label: { label: 'Nutanaa Local LLM Engine (Offline)' }, collapsibleState: TreeItemCollapsibleState.None, themeIcon: { id: Codicon.vm.id } }
-			];
-		}
-		return [];
-	}
-
-	public refresh(): void {
-		this._onDidChangeTreeData.fire();
+		this.treeView.dataProvider = dataProvider;
 	}
 }
