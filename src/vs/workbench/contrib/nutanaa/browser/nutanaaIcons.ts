@@ -4,16 +4,47 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { Codicon } from '../../../../base/common/codicons.js';
+import { FileAccess } from '../../../../base/common/network.js';
 import { registerIcon } from '../../../../platform/theme/common/iconRegistry.js';
 import { localize } from '../../../../nls.js';
 
+// 1. Resolve image path to browser URI
+const iconUri = FileAccess.asBrowserUri(
+	'vs/workbench/contrib/nutanaa/browser/media/NutanaaActivityIcon.png'
+).toString(true);
+
+// 2. Inject CSS rules directly into DOM when this module is loaded
+if (typeof document !== 'undefined') {
+	const styleElement = document.createElement('style');
+	styleElement.textContent = `
+		/* Hide default font glyph */
+		.codicon-nutanaa-view-icon::before {
+			content: '' !important;
+			display: none !important;
+		}
+
+		/* Render image in activity bar */
+		.codicon-nutanaa-view-icon {
+			width: 20px !important;
+			height: 20px !important;
+			background-image: url('${iconUri}') !important;
+			background-size: contain !important;
+			background-repeat: no-repeat !important;
+			background-position: center !important;
+			border-radius: 4px;
+		}
+	`;
+	document.head.appendChild(styleElement);
+}
+
 /**
- * Activity Bar icon for the Nutanaa view container.
+ * Main icon for Nutanaa Studio OS view container (Activity Bar).
+ * Uses Codicon.circuitBoard to satisfy VS Code's internal IconDefaults type.
  */
 export const nutanaaViewIcon = registerIcon(
 	'nutanaa-view-icon',
-	Codicon.hubot,
-	localize('nutanaaViewIcon', 'View icon of the Nutanaa view container.')
+	Codicon.circuitBoard,
+	localize('nutanaaViewIcon', 'The icon of the Nutanaa view container.')
 );
 
 /**
@@ -31,5 +62,5 @@ export const nutanaaAgentExplorerIcon = registerIcon(
 export const nutanaaRefreshIcon = registerIcon(
 	'nutanaa-refresh',
 	Codicon.refresh,
-	localize('nutanaaRefreshIcon', 'Icon for the \'Refresh\' action in the Nutanaa Agent Explorer view.')
+	localize('nutanaaRefreshIcon', "Icon for the 'Refresh' action in the Nutanaa Agent Explorer view.")
 );
