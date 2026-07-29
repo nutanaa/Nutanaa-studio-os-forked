@@ -32,6 +32,11 @@ import { nutanaaRefreshIcon } from './nutanaaIcons.js';
 import { TaskExplorerDataProvider } from './taskExplorerDataProvider.js';
 import { ProjectKnowledgeDataProvider } from './projectKnowledgeDataProvider.js';
 import { ChatDataProvider } from './chatDataProvider.js';
+import { LogsDataProvider } from './logsDataProvider.js';
+import { EventsDataProvider } from './eventsDataProvider.js';
+import { NutanaaWelcomeView } from './nutanaaWelcomeView.js';
+import { ProjectExplorerDataProvider } from './projectExplorerDataProvider.js';
+import { NutanaaViewId } from './constants.js';
 
 export class NutanaaViews extends Disposable {
 
@@ -48,6 +53,10 @@ export class NutanaaViews extends Disposable {
 		this.registerTaskExplorerView(container);
 		this.registerProjectKnowledgeView(container);
 		this.registerChatView(container);
+		this.registerLogsView(container);
+		this.registerEventsView(container);
+		this.registerWelcomeDashboard(container);
+		this.registerProjectExplorerView(container);
 
 	}
 
@@ -305,6 +314,125 @@ export class NutanaaViews extends Disposable {
 
 		const descriptor: ITreeViewDescriptor = {
 			id: 'workbench.views.nutanaa.chat',
+			name,
+			ctorDescriptor: new SyncDescriptor(TreeViewPane),
+			canToggleVisibility: true,
+			canMoveView: true,
+			treeView,
+			collapsed: false,
+			order: 106
+		};
+
+		viewsRegistry.registerViews([descriptor], container);
+	}
+	private registerLogsView(container: ViewContainer): void {
+
+		const viewsRegistry = Registry.as<IViewsRegistry>(ViewExtensions.ViewsRegistry);
+		const name = localize2('nutanaa.logs.title', 'Logs');
+
+		const treeView = this._register(
+			this.instantiationService.createInstance(
+				TreeView,
+				'workbench.views.nutanaa.logs',
+				name.value
+			)
+		);
+
+		const dataProvider = this.instantiationService.createInstance(
+			LogsDataProvider
+		);
+
+		this._register(dataProvider);
+
+		treeView.dataProvider = dataProvider;
+
+		const descriptor: ITreeViewDescriptor = {
+			id: 'workbench.views.nutanaa.logs',
+			name,
+			ctorDescriptor: new SyncDescriptor(TreeViewPane),
+			canToggleVisibility: true,
+			canMoveView: true,
+			treeView,
+			collapsed: false,
+			order: 107
+		};
+
+		viewsRegistry.registerViews([descriptor], container);
+	}
+
+	private registerEventsView(container: ViewContainer): void {
+
+		const viewsRegistry = Registry.as<IViewsRegistry>(ViewExtensions.ViewsRegistry);
+		const name = localize2('nutanaa.events.title', 'Events');
+
+		const treeView = this._register(
+			this.instantiationService.createInstance(
+				TreeView,
+				'workbench.views.nutanaa.events',
+				name.value
+			)
+		);
+
+		const dataProvider = this.instantiationService.createInstance(
+			EventsDataProvider
+		);
+
+		this._register(dataProvider);
+
+		treeView.dataProvider = dataProvider;
+
+		const descriptor: ITreeViewDescriptor = {
+			id: 'workbench.views.nutanaa.events',
+			name,
+			ctorDescriptor: new SyncDescriptor(TreeViewPane),
+			canToggleVisibility: true,
+			canMoveView: true,
+			treeView,
+			collapsed: false,
+			order: 108
+		};
+
+		viewsRegistry.registerViews([descriptor], container);
+	}
+
+	private registerWelcomeDashboard(container: ViewContainer): void {
+
+		const viewsRegistry = Registry.as<IViewsRegistry>(ViewExtensions.ViewsRegistry);
+
+		const descriptor = {
+			id: 'workbench.views.nutanaa.dashboard',
+			name: localize2('nutanaa.dashboard.title', 'Dashboard'),
+			ctorDescriptor: new SyncDescriptor(NutanaaWelcomeView),
+			canToggleVisibility: true,
+			canMoveView: true,
+			collapsed: false,
+			order: 1
+		};
+
+		viewsRegistry.registerViews([descriptor], container);
+	}
+
+	private registerProjectExplorerView(container: ViewContainer): void {
+
+		const viewsRegistry = Registry.as<IViewsRegistry>(ViewExtensions.ViewsRegistry);
+		const name = localize2('nutanaa.projectExplorer.title', 'Project Explorer');
+
+		const treeView = this._register(
+			this.instantiationService.createInstance(
+				TreeView,
+				NutanaaViewId.ProjectExplorer,
+				name.value
+			)
+		);
+
+		treeView.dataProvider = this._register(
+			this.instantiationService.createInstance(
+				ProjectExplorerDataProvider
+			)
+		);
+
+		const descriptor: ITreeViewDescriptor = {
+			id: NutanaaViewId.ProjectExplorer,
 			name,
 			ctorDescriptor: new SyncDescriptor(TreeViewPane),
 			canToggleVisibility: true,

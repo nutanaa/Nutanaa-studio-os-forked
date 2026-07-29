@@ -61,3 +61,4 @@ export namespace NutanaaConfigKey {
 	export const LogLevel = 'nutanaa.logging.level';
 	export const MaxMemoryMB = 'nutanaa.runtime.maxMemoryMB';
 }
+
