@@ -1,4 +1,7 @@
-// File: src/vs/workbench/contrib/nutanaa/models/agentHistoryModel.ts
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Nutanaa Studio OS. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
 
 export interface IAgentHistoryEntry {
 	readonly id: string;
@@ -20,6 +23,6 @@ export interface IAgentCheckpointData {
 	readonly agentId: string;
 	readonly timestamp: number;
 	readonly stepIndex: number;
-	readonly stateSnapshot: Record<string, any>;
-	readonly memorySnapshot: any[];
+	readonly stateSnapshot: Record<string, unknown>;
+	readonly memorySnapshot: unknown[];
 }

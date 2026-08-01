@@ -1,4 +1,7 @@
-// File: src/vs/workbench/contrib/nutanaa/common/agentRuntime.ts
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Nutanaa Studio OS. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
 
 import { Disposable } from '../../../../base/common/lifecycle.js';
 import { IAgentStateService } from '../common/agentStateService.js';

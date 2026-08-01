@@ -1,4 +1,7 @@
-// src/vs/workbench/contrib/nutanaa/browser/constants.ts
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Nutanaa Studio OS. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
 
 import { RawContextKey } from '../../../../platform/contextkey/common/contextkey.js';
 
@@ -15,6 +18,7 @@ export namespace NutanaaViewId {
 	export const MemoryExplorer = 'nutanaa.view.memoryExplorer';
 	export const TaskExplorer = 'nutanaa.view.taskExplorer';
 	export const ProjectKnowledge = 'nutanaa.view.projectKnowledge';
+	export const ProjectExplorer = 'nutanaa.view.projectExplorer';
 }
 
 export namespace NutanaaPanelId {
@@ -61,4 +65,3 @@ export namespace NutanaaConfigKey {
 	export const LogLevel = 'nutanaa.logging.level';
 	export const MaxMemoryMB = 'nutanaa.runtime.maxMemoryMB';
 }
-

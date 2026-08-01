@@ -1,4 +1,7 @@
-// src/vs/workbench/contrib/nutanaa/browser/nutanaaCommands.ts
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Nutanaa Studio OS. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
 
 import { Disposable } from '../../../../base/common/lifecycle.js';
 import { CommandsRegistry } from '../../../../platform/commands/common/commands.js';

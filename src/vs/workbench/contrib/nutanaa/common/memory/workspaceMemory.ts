@@ -1,11 +1,14 @@
-// File: src/vs/workbench/contrib/nutanaa/common/memory/workspaceMemory.ts
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Nutanaa Studio OS. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
 
 import { IMemoryEntry } from '../../models/memoryModel.js';
 
 export class WorkspaceMemory {
 	private readonly entries: Map<string, IMemoryEntry> = new Map();
 
-	public store(key: string, content: string, tags: string[] = [], metadata?: Record<string, any>): IMemoryEntry {
+	public store(key: string, content: string, tags: string[] = [], metadata?: Record<string, unknown>): IMemoryEntry {
 		const now = Date.now();
 		const entry: IMemoryEntry = {
 			id: `ws_mem_${now}_${Math.random().toString(36).substring(2, 7)}`,

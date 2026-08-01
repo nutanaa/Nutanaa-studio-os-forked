@@ -1,4 +1,7 @@
-// File: src/vs/workbench/contrib/nutanaa/common/agentExecution.ts
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Nutanaa Studio OS. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
 
 import { Disposable } from '../../../../base/common/lifecycle.js';
 import { IAgentTask, IAgentExecutionResult, IAgentStepExecution } from '../models/agentExecutionModel.js';
@@ -21,7 +24,7 @@ export class AgentExecutionTracker extends Disposable {
 		}
 	}
 
-	public completeExecution(executionId: string, status: 'success' | 'failed' | 'cancelled', output: any, error?: string): IAgentExecutionResult | undefined {
+	public completeExecution(executionId: string, status: 'success' | 'failed' | 'cancelled', output: unknown, error?: string): IAgentExecutionResult | undefined {
 		const record = this.activeExecutions.get(executionId);
 		if (!record) {
 			return undefined;

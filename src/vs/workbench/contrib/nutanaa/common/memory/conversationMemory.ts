@@ -1,11 +1,14 @@
-// File: src/vs/workbench/contrib/nutanaa/common/memory/conversationMemory.ts
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Nutanaa Studio OS. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
 
 import { IMemoryEntry } from '../../models/memoryModel.js';
 
 export class ConversationMemory {
 	private readonly history: IMemoryEntry[] = [];
 
-	public addTurn(role: 'user' | 'assistant' | 'system', text: string, metadata?: Record<string, any>): IMemoryEntry {
+	public addTurn(role: 'user' | 'assistant' | 'system', text: string, metadata?: Record<string, unknown>): IMemoryEntry {
 		const now = Date.now();
 		const entry: IMemoryEntry = {
 			id: `conv_${now}_${this.history.length}`,

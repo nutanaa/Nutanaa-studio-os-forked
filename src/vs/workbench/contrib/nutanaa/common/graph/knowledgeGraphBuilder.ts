@@ -1,4 +1,7 @@
-// File: src/vs/workbench/contrib/nutanaa/common/graph/knowledgeGraphBuilder.ts
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Nutanaa Studio OS. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
 
 import { URI } from '../../../../../base/common/uri.js';
 import {
@@ -13,7 +16,7 @@ export class KnowledgeGraphBuilder {
 	private readonly nodes: Map<string, IKnowledgeGraphNode> = new Map();
 	private readonly edges: Map<string, IKnowledgeGraphEdge> = new Map();
 
-	public addNode(id: string, label: string, type: KnowledgeNodeType, uri?: URI, properties?: Record<string, any>): IKnowledgeGraphNode {
+	public addNode(id: string, label: string, type: KnowledgeNodeType, uri?: URI, properties?: Record<string, unknown>): IKnowledgeGraphNode {
 		const node: IKnowledgeGraphNode = { id, label, type, uri, properties };
 		this.nodes.set(id, node);
 		return node;

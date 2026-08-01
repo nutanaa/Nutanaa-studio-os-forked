@@ -1,4 +1,7 @@
-// File: src/vs/workbench/contrib/nutanaa/common/agentHeartbeat.ts
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Nutanaa Studio OS. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
 
 import { Disposable } from '../../../../base/common/lifecycle.js';
 import { Emitter, Event } from '../../../../base/common/event.js';
@@ -7,7 +10,7 @@ import { IAgentStateService } from '../common/agentStateService.js';
 export class AgentHeartbeatMonitor extends Disposable {
 	private readonly intervalMs = 5000;
 	private readonly timeoutMs = 15000;
-	private timerHandle?: any;
+	private timerHandle?: ReturnType<typeof setInterval>;
 
 	private readonly _onAgentStalled = this._register(new Emitter<string>());
 	readonly onAgentStalled: Event<string> = this._onAgentStalled.event;
@@ -49,6 +52,7 @@ export class AgentHeartbeatMonitor extends Disposable {
 	public override dispose(): void {
 		if (this.timerHandle) {
 			clearInterval(this.timerHandle);
+			this.timerHandle = undefined;
 		}
 		super.dispose();
 	}

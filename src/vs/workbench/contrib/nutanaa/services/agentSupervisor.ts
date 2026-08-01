@@ -1,4 +1,7 @@
-// src/vs/workbench/contrib/nutanaa/services/agentSupervisor.ts
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Nutanaa Studio OS. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
 
 import { createDecorator } from '../../../../platform/instantiation/common/instantiation.js';
 import { Disposable } from '../../../../base/common/lifecycle.js';
@@ -24,7 +27,7 @@ export class AgentSupervisor extends Disposable implements IAgentSupervisor {
 
 	public supervise(): void {
 		const states = this.stateService.getAllAgentStates();
-		const healthProvider = this.healthService as any;
+		const healthProvider = this.healthService as unknown as { getHealthStatus: (agentId: string) => { unresponsive: boolean } | undefined };
 
 		for (const state of states) {
 			const isUnresponsive = typeof healthProvider.getHealthStatus === 'function'

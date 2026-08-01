@@ -1,4 +1,7 @@
-// src/vs/workbench/contrib/nutanaa/browser/nutanaaWelcomeView.ts
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Nutanaa Studio OS. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
 
 import { ViewPane, IViewPaneOptions } from '../../../browser/parts/views/viewPane.js';
 import { IKeybindingService } from '../../../../platform/keybinding/common/keybinding.js';
@@ -32,7 +35,7 @@ export class NutanaaWelcomeView extends ViewPane {
 		super.renderBody(container);
 		const root = append(container, $('.nutanaa-welcome-pane'));
 		root.style.padding = '16px';
-		
+
 		const title = append(root, $('h2'));
 		title.textContent = 'Nutanaa AI Workbench';
 
@@ -41,7 +44,7 @@ export class NutanaaWelcomeView extends ViewPane {
 
 		const actionsContainer = append(root, $('.quick-actions'));
 		actionsContainer.style.marginTop = '12px';
-		
+
 		const startChatBtn = append(actionsContainer, $('button.monaco-button'));
 		startChatBtn.textContent = 'Open AI Chat Panel';
 		startChatBtn.style.padding = '6px 12px';

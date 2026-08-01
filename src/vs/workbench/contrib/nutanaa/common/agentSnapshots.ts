@@ -1,4 +1,7 @@
-// File: src/vs/workbench/contrib/nutanaa/common/agentSnapshots.ts
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Nutanaa Studio OS. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
 
 import { Disposable } from '../../../../base/common/lifecycle.js';
 import { IAgentCheckpointData } from '../models/agentHistoryModel.js';
@@ -6,7 +9,7 @@ import { IAgentCheckpointData } from '../models/agentHistoryModel.js';
 export class AgentSnapshotManager extends Disposable {
 	private readonly snapshots = new Map<string, IAgentCheckpointData[]>();
 
-	public createSnapshot(agentId: string, stepIndex: number, stateSnapshot: Record<string, any>, memorySnapshot: any[]): IAgentCheckpointData {
+	public createSnapshot(agentId: string, stepIndex: number, stateSnapshot: Record<string, unknown>, memorySnapshot: unknown[]): IAgentCheckpointData {
 		const checkpoint: IAgentCheckpointData = {
 			checkpointId: `snap_${agentId}_${Date.now()}`,
 			agentId,

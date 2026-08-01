@@ -1,4 +1,7 @@
-// File: src/vs/workbench/contrib/nutanaa/browser/agentTimeline.ts
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Nutanaa Studio OS. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
 
 import { ViewPane, IViewPaneOptions } from '../../../browser/parts/views/viewPane.js';
 import { IKeybindingService } from '../../../../platform/keybinding/common/keybinding.js';
@@ -6,7 +9,7 @@ import { IContextMenuService } from '../../../../platform/contextview/browser/co
 import { IConfigurationService } from '../../../../platform/configuration/common/configuration.js';
 import { IContextKeyService } from '../../../../platform/contextkey/common/contextkey.js';
 import { IViewDescriptorService } from '../../../common/views.js';
-import { IInstantiationService } from '../../../../platform/instantiation/common/instantiation.js'
+import { IInstantiationService } from '../../../../platform/instantiation/common/instantiation.js';
 import { IOpenerService } from '../../../../platform/opener/common/opener.js';
 
 import { IThemeService } from '../../../../platform/theme/common/themeService.js';

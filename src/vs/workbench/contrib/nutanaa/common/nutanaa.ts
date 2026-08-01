@@ -5,7 +5,6 @@
 
 import { createDecorator } from '../../../../platform/instantiation/common/instantiation.js';
 import { Event } from '../../../../base/common/event.js';
-
 /**
  * Identifier of the Nutanaa view container that hosts all Nutanaa
  * sidebar views (Agents, Workflows, Providers, Memory, Tasks).
@@ -18,20 +17,24 @@ export const NUTANAA_VIEW_CONTAINER_ID = 'workbench.view.nutanaa';
 export const NUTANAA_AGENT_EXPLORER_VIEW_ID = 'workbench.views.nutanaa.agentExplorer';
 
 /**
+ * Base HTTP origin of the local Nutanaa Runtime backend (see `runtime/main.py`).
+ * Phase 1 only: hardcoded to the default local dev port. Once the runtime
+ * is packaged with the editor, or made remotely configurable, this should
+ * move to a settings-backed value instead of a constant.
+ */
+export const NUTANAA_RUNTIME_HTTP_URL = 'http://127.0.0.1:8787';
+
+/**
+ * WebSocket URL for the Nutanaa Runtime backend's event stream.
+ */
+export const NUTANAA_RUNTIME_WS_URL = 'ws://127.0.0.1:8787/ws';
+
+/**
  * Command id that refreshes the Agent Explorer view.
  */
 export const NUTANAA_AGENT_EXPLORER_REFRESH_COMMAND_ID = 'nutanaa.agentExplorer.refresh';
 
-/**
- * Describes the connection state between the Nutanaa Studio OS editor
- * front-end and the Nutanaa Runtime backend process.
- *
- * The runtime backend (FastAPI/WebSocket bridge, per the Nutanaa Studio OS
- * roadmap Phase 3) is a separate, not-yet-implemented service. Until that
- * bridge exists, {@link INutanaaRuntimeConnectionService} implementations
- * must honestly report {@link NutanaaRuntimeConnectionState.Disconnected}
- * rather than synthesizing fake agents, workflows, or providers.
- */
+
 export const enum NutanaaRuntimeConnectionState {
 	/** No attempt has been made to reach the runtime backend yet. */
 	Disconnected = 0,

@@ -1,4 +1,7 @@
-// File: src/vs/workbench/contrib/nutanaa/models/memoryModel.ts
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Nutanaa Studio OS. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
 
 export type MemoryType = 'workspace' | 'conversation' | 'agent' | 'project' | 'knowledge';
 
@@ -12,7 +15,7 @@ export interface IMemoryEntry {
 	readonly lastAccessedTimestamp: number;
 	readonly accessCount: number;
 	readonly score: number;
-	readonly metadata?: Record<string, any>;
+	readonly metadata?: Record<string, unknown>;
 }
 
 export interface IMemoryQuery {

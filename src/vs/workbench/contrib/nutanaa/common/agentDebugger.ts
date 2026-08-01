@@ -1,4 +1,7 @@
-// File: src/vs/workbench/contrib/nutanaa/common/agentDebugger.ts
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Nutanaa Studio OS. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
 
 import { Disposable } from '../../../../base/common/lifecycle.js';
 
@@ -6,7 +9,7 @@ export interface IDebugFrame {
 	readonly frameId: string;
 	readonly agentId: string;
 	readonly stepName: string;
-	readonly variables: Record<string, any>;
+	readonly variables: Record<string, unknown>;
 	readonly timestamp: number;
 }
 
@@ -14,7 +17,7 @@ export class AgentDebugger extends Disposable {
 	private readonly frames: IDebugFrame[] = [];
 	private isPausedAtBreakpoint = false;
 
-	public pushFrame(agentId: string, stepName: string, variables: Record<string, any>): IDebugFrame {
+	public pushFrame(agentId: string, stepName: string, variables: Record<string, unknown>): IDebugFrame {
 		const frame: IDebugFrame = {
 			frameId: `frame_${Date.now()}`,
 			agentId,

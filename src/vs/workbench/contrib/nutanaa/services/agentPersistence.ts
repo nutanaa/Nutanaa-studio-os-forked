@@ -1,4 +1,7 @@
-// File: src/vs/workbench/contrib/nutanaa/services/agentPersistence.ts
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Nutanaa Studio OS. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
 
 import { createDecorator } from '../../../../platform/instantiation/common/instantiation.js';
 import { Disposable } from '../../../../base/common/lifecycle.js';
@@ -8,7 +11,7 @@ export const IAgentPersistenceService = createDecorator<IAgentPersistenceService
 
 export interface IAgentPersistenceService {
 	readonly _serviceBrand: undefined;
-	saveState(key: string, data: any): void;
+	saveState(key: string, data: unknown): void;
 	loadState<T>(key: string): T | undefined;
 }
 
@@ -21,7 +24,7 @@ export class AgentPersistenceService extends Disposable implements IAgentPersist
 		super();
 	}
 
-	public saveState(key: string, data: any): void {
+	public saveState(key: string, data: unknown): void {
 		this.storageService.store(
 			`nutanaa.agent.${key}`,
 			JSON.stringify(data),

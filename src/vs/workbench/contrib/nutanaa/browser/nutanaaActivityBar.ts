@@ -1,15 +1,17 @@
-// src/vs/workbench/contrib/nutanaa/browser/nutanaaActivityBar.ts
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Nutanaa Studio OS. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
 
 import { Disposable } from '../../../../base/common/lifecycle.js';
 import { Registry } from '../../../../platform/registry/common/platform.js';
 import { ViewContainerLocation, IViewContainersRegistry, Extensions as ViewContainerExtensions, IViewDescriptorService } from '../../../common/views.js';
 import { SyncDescriptor } from '../../../../platform/instantiation/common/descriptors.js';
 import { ViewPaneContainer } from '../../../browser/parts/views/viewPaneContainer.js';
-import { NUTANAA_VIEW_CONTAINER_ID } from './constants.js';
+import { NUTANAA_VIEW_CONTAINER_ID, NutanaaContextKey } from './constants.js';
 import { nutanaaIconActivityContainer } from './theme.js';
 import { localize } from '../../../../nls.js';
 import { IContextKeyService, IContextKey } from '../../../../platform/contextkey/common/contextkey.js';
-import { NutanaaContextKey } from './constants.js';
 
 export class NutanaaActivityBarContribution extends Disposable {
 	private readonly isRuntimeActive: IContextKey<boolean>;

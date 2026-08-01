@@ -1,11 +1,14 @@
-// File: src/vs/workbench/contrib/nutanaa/common/memory/agentMemory.ts
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Nutanaa Studio OS. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
 
 import { IMemoryEntry } from '../../models/memoryModel.js';
 
 export class AgentMemory {
 	private readonly memoryStore: Map<string, IMemoryEntry> = new Map();
 
-	public recordAgentState(agentId: string, action: string, outcome: string, metadata?: Record<string, any>): IMemoryEntry {
+	public recordAgentState(agentId: string, action: string, outcome: string, metadata?: Record<string, unknown>): IMemoryEntry {
 		const now = Date.now();
 		const key = `agent_${agentId}_${now}`;
 		const entry: IMemoryEntry = {

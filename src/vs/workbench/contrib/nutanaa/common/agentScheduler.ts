@@ -1,11 +1,14 @@
-// File: src/vs/workbench/contrib/nutanaa/common/agentScheduler.ts
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Nutanaa Studio OS. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
 
 import { Disposable } from '../../../../base/common/lifecycle.js';
 import { AgentQueue } from '../common/agentQueue.js';
 import { IAgentQueueItem } from '../models/agentQueueModel.js';
 
 export class AgentScheduler extends Disposable {
-	private timerHandle?: any;
+	private timerHandle?: ReturnType<typeof setInterval>;
 
 	constructor(private readonly queue: AgentQueue, private readonly onExecute: (item: IAgentQueueItem) => Promise<void>) {
 		super();

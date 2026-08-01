@@ -1,4 +1,7 @@
-// File: src/vs/workbench/contrib/nutanaa/services/agentCoordinator.ts
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Nutanaa Studio OS. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
 
 import { createDecorator } from '../../../../platform/instantiation/common/instantiation.js';
 import { Disposable } from '../../../../base/common/lifecycle.js';
@@ -12,7 +15,7 @@ export const IAgentCoordinator = createDecorator<IAgentCoordinator>('agentCoordi
 
 export interface IAgentCoordinator {
 	readonly _serviceBrand: undefined;
-	submitTask(agentId: string, title: string, payload: Record<string, any>, priority?: AgentPriority): void;
+	submitTask(agentId: string, title: string, payload: Record<string, unknown>, priority?: AgentPriority): void;
 	startScheduler(): void;
 	stopScheduler(): void;
 }
@@ -21,7 +24,7 @@ export class AgentCoordinator extends Disposable implements IAgentCoordinator {
 	declare readonly _serviceBrand: undefined;
 
 	private readonly queue = this._register(new AgentQueue());
-	private loopTimer?: any;
+	private loopTimer?: ReturnType<typeof setInterval>;
 
 	constructor(
 		@IAgentStateService private readonly stateService: IAgentStateService,
@@ -30,7 +33,7 @@ export class AgentCoordinator extends Disposable implements IAgentCoordinator {
 		super();
 	}
 
-	public submitTask(agentId: string, title: string, payload: Record<string, any>, priority: AgentPriority = 'normal'): void {
+	public submitTask(agentId: string, title: string, payload: Record<string, unknown>, priority: AgentPriority = 'normal'): void {
 		const task: IAgentTask = {
 			id: `task_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
 			agentId,
@@ -77,12 +80,12 @@ export class AgentCoordinator extends Disposable implements IAgentCoordinator {
 				currentTask: undefined,
 				progress: 100
 			});
-		} catch (err: any) {
+		} catch (err) {
 			const requeued = this.queue.reenqueueForRetry(item);
 			if (!requeued) {
 				this.stateService.updateAgentState(agentId, {
 					status: 'failed',
-					error: err.message || 'Execution error'
+					error: err instanceof Error ? err.message : 'Execution error'
 				});
 			}
 		} finally {
